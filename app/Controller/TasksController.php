@@ -46,4 +46,56 @@ class TasksController extends AppController {
 		   }
         }
     }
+	
+	public function edit($id){
+		
+		/*$task = $this->Task->findById($id);	
+		
+		if (!$task){
+			$this->Flash->error('そんなタスクないよ');
+			$this->redirect(array('action' => 'index'));
+		}
+		
+		if ($this->request->is('post', 'put')){
+			
+			$this->Task->id = $id;
+			
+			if ($this->Task->save($this->request->data)){
+				$this->Flash->success('タスク' .$id. 'を編集しました' );
+				$this->redirect('/tasks/index');
+			}else{
+				$this->Flash->erroe('編集できませんでした');
+			}
+		}else{
+			$this->request->data = $task;
+		}*/
+		
+		$options = array(
+			'conditions' => array(
+				'Task.id' => $id,
+				'Task.status' => 0
+			)
+		);
+		
+		$task = $this->Task->find('first', $options);
+		
+		if (!$task){
+			$this->Flash->error('タスクが見つかりません');
+			$this->redirect(array('action' => 'index'));
+		}
+		
+		if ($this->request->is(array('post', 'put'))){
+			
+			$this->Task->id = $id;
+		
+		if ($this->Task->save($this->request->data)){
+			$this->Flash->success('更新しました');
+			return $this->redirect(array('action' => 'index'));
+		}else{
+			$this->Flash->error('更新できませんでした');
+		}
+	 }else{
+		$this->request->data = $task;
+	 }
+  }
 }

@@ -24,7 +24,10 @@
             <td><?php echo h($task['Task']['created']); ?></td>
             
             
-            <td><?php echo $this->Html->link('このタスクを完了する', '/Tasks/done/' . $task['Task']['id']); ?></td>
+            <td>
+				<?php echo $this->Html->link('このタスクを完了する', '/Tasks/done/' . $task['Task']['id']); ?><br>
+                <?php echo $this->Html->link('このタスクを編集する', '/Tasks/edit/' . $task['Task']['id']); ?>
+            </td>
         </tr>
     
 </table>
