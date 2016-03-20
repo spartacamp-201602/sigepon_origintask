@@ -2,7 +2,7 @@
 
 <?php
 	
-	echo $this->element('form');
-	echo $this->Form->end('保存');
+	echo $this->element('task_form');
+	echo $this->Form->end('タスクを保存');
 
 ?>
