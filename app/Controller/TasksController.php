@@ -3,7 +3,7 @@
 class TasksController extends AppController {
     //public $scaffold;
 	
-	public $helper = array('Html'、'Form');
+	public $helper = array('Html', 'Form');
 	public $components = array('Flash');
 	
 	public function index(){
