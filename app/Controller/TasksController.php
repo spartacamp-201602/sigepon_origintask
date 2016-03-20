@@ -4,6 +4,7 @@ class TasksController extends AppController {
     //public $scaffold;
 	
 	public $helper = array('Html', 'Form');
+	//public $helper = ['Html', 'Form'];
 	public $components = array('Flash');
 	
 	public function index(){
@@ -24,19 +25,25 @@ class TasksController extends AppController {
         $this->Task->saveField('status', 1);
 
         $msg = sprintf('タスク %s を完了しました', $id);
+		
+		$this->Flash->success('タスク' .$id. 'を完了しました');
 
-        $this->Flash->success($msg);
-        return $this->redirect(array('action' => 'index'));
+//        $this->Flash->success($msg);
+//        return $this->redirect(array('action' => 'index'));
     }
 	
 	public function create() {
         if ($this->request->is('post')) {
 
-            $this->Task->save($this->request->data);
-            $msg = sprintf('タスク %s を作成しました', $this->Task->id);
-
-            $this->Flash->success($msg);
-            $this->redirect(array('action' => 'index'));
+           if ($this->Task->save($this->request->data)){
+           // $msg = sprintf('タスク %s を作成しました', $this->Task->id);
+           // $this->Flash->success($msg);
+		   
+		   $this->Flash->success('保存成功!');
+           $this->redirect(array('action' => 'index'));
+		   }else{
+			   $this->Flash->error('保存できませんでした...');
+		   }
         }
     }
 }
